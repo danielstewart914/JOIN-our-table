@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="iOAdz8FvzqGq1g82DfX7" name="Page-1">
-        <mxGraphModel dx="895" dy="575" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#000000" math="0" shadow="0">
+        <mxGraphModel dx="883" dy="617" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#000000" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -75,28 +75,30 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="35" value="Tag" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#000099;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
-                    <mxGeometry x="310" y="280" width="170" height="78" as="geometry">
-                        <mxRectangle x="160" y="290" width="50" height="26" as="alternateBounds"/>
+                <mxCell id="35" value="Tag" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#000099;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1" collapsed="1">
+                    <mxGeometry x="310" y="280" width="50" height="26" as="geometry">
+                        <mxRectangle x="310" y="280" width="170" height="78" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="36" value="id (PRIMARY KEY)" style="text;strokeColor=#000099;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35" vertex="1">
-                    <mxGeometry y="26" width="170" height="26" as="geometry"/>
+                    <mxGeometry y="26" width="50" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="37" value="tag_name ( STRING(30) )" style="text;strokeColor=#000099;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35" vertex="1">
-                    <mxGeometry y="52" width="170" height="26" as="geometry"/>
+                    <mxGeometry y="52" width="50" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="41" value="RecipeTag" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
-                    <mxGeometry x="90" y="160" width="160" height="104" as="geometry"/>
+                <mxCell id="41" value="RecipeTag" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1" collapsed="1">
+                    <mxGeometry x="90" y="160" width="84" height="26" as="geometry">
+                        <mxRectangle x="90" y="160" width="160" height="104" as="alternateBounds"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="42" value="id (PRIMARY KEY)" style="text;strokeColor=#660000;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="41" vertex="1">
-                    <mxGeometry y="26" width="160" height="26" as="geometry"/>
+                    <mxGeometry y="26" width="84" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="43" value="recipe_id ( INTEGER )" style="text;strokeColor=#660000;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="41" vertex="1">
-                    <mxGeometry y="52" width="160" height="26" as="geometry"/>
+                    <mxGeometry y="52" width="84" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="44" value="tag_id ( INTEGER )" style="text;strokeColor=#660000;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="41" vertex="1">
-                    <mxGeometry y="78" width="160" height="26" as="geometry"/>
+                    <mxGeometry y="78" width="84" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="57" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="43" target="7" edge="1">
                     <mxGeometry relative="1" as="geometry">
