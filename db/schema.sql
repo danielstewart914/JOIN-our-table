@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS JOIN_our_table_db;
+
+CREATE DATABASE JOIN_our_table_db;
