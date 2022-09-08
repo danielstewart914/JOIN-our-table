@@ -41,7 +41,7 @@ RecipeIngredient.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'recipeingredient'
+        modelName: 'recipeIngredient'
     }
 );
 
