@@ -54,5 +54,25 @@
     {
         "id": 15,
         "unit_name": "box"
+    },
+    {
+        "id": 16,
+        "unit_name": "9 in"
+    },
+    {
+        "id": 17,
+        "unit_name": "optional"
+    },
+    {
+        "id": 18,
+        "unit_name": "trimmed"
+    },
+    {
+        "id": 19,
+        "unit_name": "cloves"
+    },
+    {
+        "id": 20,
+        "unit_name": "large"
     }
 ]
