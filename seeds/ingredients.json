@@ -1,0 +1,215 @@
+[
+  {
+    "id": 1,
+    "ingredient_name": "Chicken breast"
+  },
+  {
+    "id": 2,
+    "ingredient_name": "Carrots"
+  },
+  {
+    "id": 3,
+    "ingredient_name": "Frozen peas"
+  },
+  {
+    "id": 4,
+    "ingredient_name": "Sliced celery"
+  },
+  {
+    "id":5,
+    "ingredient_name": "Butter"
+  },
+  {
+    "id":6,
+    "ingredient_name": "Chopped onion"
+  },
+  {
+    "id": 7,
+    "ingredient_name": "All-purpope flour"
+  },
+  {
+    "id": 8,
+    "ingredient_name": "Salt"
+  },
+  {
+    "id": 9,
+    "ingredient_name": "Black pepper"
+  },
+  {
+    "id": 10,
+    "ingredient_name": "Cerlery seed"
+  },
+  {
+    "id": 11,
+    "ingredient_name": "Chicken broth"
+  },
+  {
+    "id": 12,
+    "ingredient_name": "Milk"
+  },
+  {
+    "id": 13,
+    "ingredient_name": "Unbaked pie crust"
+  },
+  {
+    "id": 14,
+    "ingredient_name": "Shredded chicken"
+  },
+  {
+    "id": 15,
+    "ingredient_name": "Shredded turkey"
+  },
+  {
+    "id": 16,
+    "ingredient_name": "White beans"
+  },
+  {
+    "id": 17,
+    "ingredient_name": "Great northern beans"
+  },
+  {
+    "id": 18,
+    "ingredient_name": "Salsa verde"
+  },
+  {
+    "id": 19,
+    "ingredient_name": "Cumin"
+  },
+  {
+    "id": 20,
+    "ingredient_name": "Corn chips"
+  },
+  {
+    "id": 21,
+    "ingredient_name": "Chopped cilantro" 
+  },
+  {
+    "id": 22,
+    "ingredient_name": "Lime Wedge"
+  },
+  {
+    "id": 23,
+    "ingredient_name": "Sliced green onion"
+  },
+  {
+    "id": 24, 
+    "ingredient_name": "Diced avacado"
+  },
+  {
+    "id": 25,
+    "ingredient_name": "Sour Cream"
+  },
+  {
+    "id": 26,
+    "ingredient_name": "Mac n' cheese"
+  },
+  {
+    "id": 27,
+    "ingredient_name": "Brocoli"
+  },
+  {
+    "id": 28,
+    "ingredient_name": "Grated cheddar cheese"
+  },
+  {
+    "id": 29,
+    "ingredient_name": "Bone-in chicken thighs"
+  },
+  {
+    "id": 30,
+    "ingredient_name": "Kosher salt"
+  },
+  {
+    "id": 31,
+    "ingredient_name": "Kosher pepper"
+  },
+  {
+    "id": 32,
+    "ingredient_name": "Yukon Gold Potatoe"
+  },
+  {
+    "id": 33,
+    "ingredient_name": "Vegetable oil"
+  },
+  {
+    "id": 34,
+    "ingredient_name": "Garlic clove"
+  },
+  {
+    "id": 35,
+    "ingredient_name": "Lemon juice"
+  },
+  {
+    "id": 36,
+    "ingredient_name": "Dried oregano"
+  },
+  {
+    "id": 37,
+    "ingredient_name": "Dried thyme"
+  },
+  {
+    "id": 38,
+    "ingredient_name": "Dry white wine"
+  },
+  {
+    "id": 39,
+    "ingredient_name": "Minced fresh parsley"
+  },
+  {
+    "id": 40,
+    "ingredient_name": "Ground beef"
+  },
+  {
+    "id": 41,
+    "ingredient_name": "Ground pork"
+  },
+  {
+    "id": 42,
+    "ingredient_name": "Minced flat leaf parsley"
+  },
+  {
+    "id": 43,
+    "ingredient_name": "Ground allspice"
+  },
+  {
+    "id": 44,
+    "ingredient_name": "Ground nutmeg"
+  },
+  {
+    "id": 45,
+    "ingredient_name": "Grated yellow onion" 
+  },
+  {
+    "id": 46,
+    "ingredient_name": "Freshly ground pepper"
+  },
+  {
+    "id": 47,
+    "ingredient_name": "Minced garlic clove"
+  },
+  {
+    "id": 48,
+    "ingredient_name": "panko"
+  },
+  {
+    "id": 49,
+    "ingredient_name": "egg"
+  },
+  {
+    "id": 50,
+    "ingredient_name": "Olive oil"
+  },
+  {
+    "id": 51,
+    "ingredient_name": "Flour"
+  },
+  {
+    "id": 52,
+    "ingredient_name": "Beef broth"
+  },
+  {
+    "id": 53,
+    "ingredient_name": "heavy cream"
+  }
+
+]
