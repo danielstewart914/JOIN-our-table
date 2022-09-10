@@ -121,7 +121,7 @@
   },
   {
     "id": 31,
-    "ingredient_name": "Kosher pepper"
+    "ingredient_name": "Pepper"
   },
   {
     "id": 32,
@@ -133,7 +133,7 @@
   },
   {
     "id": 34,
-    "ingredient_name": "Garlic clove"
+    "ingredient_name": "Garlic"
   },
   {
     "id": 35,
@@ -185,11 +185,11 @@
   },
   {
     "id": 47,
-    "ingredient_name": "Minced garlic clove"
+    "ingredient_name": "Minced garlic"
   },
   {
     "id": 48,
-    "ingredient_name": "panko"
+    "ingredient_name": "Panko"
   },
   {
     "id": 49,
