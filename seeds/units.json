@@ -46,5 +46,13 @@
     {
         "id": 12,
         "unit_name": "kg"
+    },
+    {
+        "id": 14,
+        "unit_name": "can"
+    },
+    {
+        "id": 15,
+        "unit_name": "box"
     }
 ]
