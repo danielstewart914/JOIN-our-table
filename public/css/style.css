@@ -1,14 +1,25 @@
 
+body {
+    background-color: #31572cff;
+}
+
 .mainBanner {
-    background-color: darkgreen;
-    color: white;
+    background-color: #132a13ff;
+    color: white; 
 }
 
 .navBar {
-    background-color: lightgreen;
+    background-color: #90a955ff;
 }
 
 .nav-link {
-    color: black;
+    color: white;
 }
 
+
+
+/* --phthalo-green: #132a13ff;
+--hunter-green: #31572cff;
+--sap-green: #4f772dff;
+--asparagus: #90a955ff;
+--key-lime: #ecf39eff; */
