@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "name": "Jean-Luc Picard",
+        "username": "jPicard",
+        "email": "jpicard@ncc1701d.starfleet.gov",
+        "password": "password12345"
+    },
+    {
+        "id": 2,
+        "name": "William T. Riker",
+        "username": "numberOne",
+        "email": "wriker@ncc1701d.starfleet.gov",
+        "password": "password12345"
+    },
+    {
+        "id": 3,
+        "name": "Data",
+        "username": "data",
+        "email": "data@ncc1701d.starfleet.gov",
+        "password": "password12345"
+    },
+    {
+        "id": 4,
+        "name": "Beverly Crusher",
+        "username": "beverly",
+        "email": "bcrusher@ncc1701d.starfleet.gov",
+        "password": "password12345"
+    },
+    {
+        "id": 5,
+        "name": "Geordi La Forge",
+        "username": "theRealGeordi",
+        "email": "glaforge@ncc1701d.starfleet.gov",
+        "password": "password12345"
+    },
+    {
+        "id": 6,
+        "name": "Miles O'Brien",
+        "username": "mobrien",
+        "email": "mobrien@ncc1701d.starfleet.gov",
+        "password": "password12345"
+    },
+    {
+        "id": 7,
+        "name": "Wesley Crusher",
+        "username": "WizKid",
+        "email": "wcrusher@starfleetacademy.gov",
+        "password": "password12345"
+    }
+]
