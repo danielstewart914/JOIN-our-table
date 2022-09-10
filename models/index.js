@@ -19,6 +19,7 @@ Recipe.belongsToMany( Ingredient, {
         model: RecipeIngredient,
         unique: false
     },
+    foreignKey: 'recipe_id',
     as: 'ingredients'
 } );
 
@@ -27,22 +28,25 @@ Ingredient.belongsToMany( Recipe, {
         model: RecipeIngredient,
         unique: false
     },
+    foreignKey: 'ingredient_id',
     as: 'recipes'
 } );
 
-Unit.belongsToMany( Recipe, {
+Unit.belongsToMany( Ingredient, {
     through: {
         model: RecipeIngredient,
         unique: false
     },
-    as: 'recipes'
+    foreignKey: 'unit_id',
+    as: 'ingredients'
 } );
 
-Recipe.belongsToMany( Unit, {
+Ingredient.belongsToMany( Unit, {
     through: {
         model: RecipeIngredient,
         unique: false
     },
+    foreignKey: 'ingredient_id',
     as: 'unit'
 } );
 
