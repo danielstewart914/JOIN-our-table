@@ -1,7 +1,5 @@
 const homeRouter = require('express').Router();
-const { Router } = require('express');
-const sequelize = require('../config/connection');
-const { } = require('../models');
+const { Recipe, Unit, Ingredient, RecipeIngredient } = require('../models');
 
 homeRouter.get( '/login', ( req, res ) => {
 
@@ -27,6 +25,34 @@ homeRouter.get( '/signup', ( req, res ) => {
   }
 
   res.render( 'signup' );
+} );
+
+homeRouter.get( '/recipes/:id', async ( req, res ) => {
+  try { 
+    const recipeData = await Recipe.findByPk( req.params.id, {
+      include: {
+        model: Ingredient,
+        through: RecipeIngredient,
+        as: 'ingredients',
+        attributes: [ 'ingredient_name' ],
+        include: {
+          model: Unit,
+          through: RecipeIngredient,
+          as: 'unit'
+        }
+      } 
+  } );
+
+  const recipe = recipeData.toJSON();
+
+  res.render( 'recipe', { 
+    user_id: req.session.user_id,
+    recipe
+   } );
+  
+  } catch ( err ) {
+    res.status(400).json( err );
+  }
 } );
 
 

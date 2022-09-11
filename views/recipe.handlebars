@@ -1,0 +1,10 @@
+<div class="container d-flex flex-column align-items-start">
+    <h2>{{recipe.recipe_title}}</h2>
+    <p>{{recipe.description}}</p>
+    <ul>
+    {{#each recipe.ingredients}}
+        <li>{{recipeIngredient.amount}} - {{unit.0.unit_name}} {{ingredient_name}}</li>
+    {{/each}}
+    </ul>
+    <p style="white-space: pre-line">{{recipe.directions}}</p>
+</div>
