@@ -16,7 +16,25 @@ body {
     color: white;
 }
 
+.bg-asparagus {
+    background-color: #90a955ff;
+}
 
+.bg-phthalo-green {
+    background-color: #132a13ff;
+}
+
+.bg-key-lime {
+    background-color: #ecf39eff;
+}
+
+.border-asparagus {
+    border-color: #90a955ff !important;
+}
+
+.pre-line {
+    white-space: pre-line;
+}
 
 /* --phthalo-green: #132a13ff;
 --hunter-green: #31572cff;
