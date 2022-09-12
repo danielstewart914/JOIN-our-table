@@ -1,30 +1,36 @@
 <h2>Sign Up</h2>
-<form class="signup-form container">
+<form id="signUp" class="container text-black">
     <div class="row justify-content-center">
         <div class="form-floating m-1 col-sm-8 col-lg-6">
-            <input class="form-control" name="FullName" type="text" id="fullName" placeholder="Full Name">
+            <input class="form-control" name="FullName" type="text" id="fullName" placeholder="Full Name" data-bs-trigger="manual" data-bs-placement="left" data-bs-title="Name cannot be blank!">
             <label class="from-label ms-3" for="fullName">Full Name</label>
+            <small class="ms-2 text-white">This is private, only you will see this.</small>
         </div>
         <div class="form-floating m-1 col-sm-8 col-lg-6">
-            <input class="form-control" name="username" type="text" id="username" placeholder="Username">
+            <input class="form-control" name="username" type="text" id="username" placeholder="Username" data-bs-trigger="manual" data-bs-placement="left" data-bs-title="Username cannot be blank!">
             <label class="from-label ms-3" for="username">Username</label>
+            <small class="ms-2 text-white">This will be your publicly visible username.</small>
         </div>
         <div class="form-floating m-1 col-sm-8 col-lg-6">
-            <input class="form-control" name="Email:" type="text" id="signUpEmail" placeholder="Email:">
+            <input class="form-control" name="Email:" type="text" id="signUpEmail" placeholder="Email:" data-bs-trigger="manual" data-bs-placement="left" data-bs-title="Must be a valid Email!">
             <label class="from-label ms-3" for="signUpEmail">Email:</label>
+            <small class="ms-2 text-white">Must be a valid email address.</small>
         </div>
         <div class="form-floating m-1 col-sm-8 col-lg-6">
-            <input class="form-control" name="Password" type="password" id="signUpPassword" placeholder="Password:">
+            <input class="form-control" name="Password" type="password" id="signUpPassword" placeholder="Password:" data-bs-trigger="manual" data-bs-placement="left" data-bs-title="Password Must be at least 8 Characters Long!">
             <label class="form-label ms-3" for="signUpPassword">Password:</label>
+            <small class="ms-2 text-white">Must be 8 characters or more.</small>
         </div>
         <div class="form-floating m-1 col-12 text-center">
-            <button class="btn btn-secondary bg-dark-grey px-5" type="submit">Sign Up</button>
+            <button class="btn btn-custom px-5" type="submit">Sign Up</button>
         </div>
     </div>
 </form>
 <footer>
     Already have an Account?
-    <a href="/login">Login Here</a>
+    <a class="text-black" href="/login">Login Here</a>
 </footer>
+
+{{>failed-modal}}
 
 <script src="/js/signUp.js"></script>

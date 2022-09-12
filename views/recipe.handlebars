@@ -1,0 +1,22 @@
+<div class="container d-flex flex-column align-items-start">
+    <div class="card border border-5 border-light">
+        <div class="card-header bg-phthalo-green text-white text-center">
+            <h2 class="display-4">{{recipe.recipe_title}}</h2>
+        </div>
+        <div class="card-body bg-key-lime p-5 text-black">
+            <p class="fs-3">{{recipe.description}}</p>
+            <div class="row p-3">
+                <div class="col-lg-6 d-flex align-items-center justify-content-center position-relative order-lg-1">
+                    <img src="{{#if recipe.image_path}}{{recipe.image_path}}{{else}}/images/default.svg{{/if}}" alt="Recipe Image" class="w-100">
+                    {{#unless recipe.image_path}}<p class="fs-1 fw-semibold position-absolute text-black py-2 px-4 bg-white rounded-2 bg-opacity-50">No Image</p>{{/unless}}
+                </div>
+                <ul class="fs-5 col-lg-6 ps-md-5 py-3">
+                {{#each recipe.ingredients}}
+                    <li><span class="fw-semibold">{{recipeIngredient.amount}}</span> <span class="fw-bold">{{unit.0.unit_name}}</span> - {{ingredient_name}}</li>
+                {{/each}}
+                </ul>
+            </div>
+            <p class="pre-line mt-3 fw-semibold">{{recipe.directions}}</p>
+        </div>
+    </div>
+</div>

@@ -1,25 +1,40 @@
-
+:root {
+    --phthalo-green: #132a13ff;
+    --hunter-green: #31572cff;
+    --sap-green: #4f772dff;
+    --asparagus: #90a955ff;
+    --key-lime: #ecf39eff;
+}
 body {
-    background-color: #31572cff;
+    background-color: var(--sap-green);
 }
 
-.mainBanner {
-    background-color: #132a13ff;
-    color: white; 
+.bg-asparagus {
+    background-color: var(--asparagus);
 }
 
-.navBar {
-    background-color: #90a955ff;
+.bg-phthalo-green {
+    background-color: var(--phthalo-green);
 }
 
-.nav-link {
-    color: white;
+.bg-key-lime {
+    background-color: var(--key-lime);
 }
 
+.pre-line {
+    white-space: pre-line;
+}
 
+.brand {
+    font-size: 1em;
+}
 
-/* --phthalo-green: #132a13ff;
---hunter-green: #31572cff;
---sap-green: #4f772dff;
---asparagus: #90a955ff;
---key-lime: #ecf39eff; */
+.btn-custom {
+    background-color: var(--phthalo-green);
+    color: #fff;
+}
+
+.btn-custom:hover, .btn-nav:focus {
+    background-color: var(--sap-green);
+    color: #fff; 
+}
