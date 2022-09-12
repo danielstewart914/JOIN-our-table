@@ -4,9 +4,9 @@ const { Recipe, Unit, Ingredient, RecipeIngredient } = require('../models');
 homeRouter.get( '/', ( req, res ) => {
 
 // * homepage render
-res.render( 'homepage', {
+res.render( 'homePage', {
   logged_in: req.session.logged_in,
-  userName: req.session.userName
+  user_name: req.session.user_name
 } );
     
 } );
@@ -47,12 +47,30 @@ homeRouter.get( '/recipes/:id', async ( req, res ) => {
       } 
   } );
 
+  if ( !recipeData ) {
+    res.render( '404', {
+      logged_in: req.session.logged_in,
+      user_name: req.session.user_name
+  } );
+  return;
+
+  }
+
   const recipe = recipeData.toJSON();
+
+  if ( !recipe.public && recipe.user_id !== req.session.user_id ) {
+    res.render( '401', {
+      logged_in: req.session.logged_in,
+      user_name: req.session.user_name
+  } );
+  return;
+
+  }
 
   res.render( 'recipe', {
     logged_in: req.session.logged_in,
     user_id: req.session.user_id,
-    userName: req.session.userName,
+    user_name: req.session.user_name,
     recipe
    } );
   
@@ -61,5 +79,12 @@ homeRouter.get( '/recipes/:id', async ( req, res ) => {
   }
 } );
 
+// * IMPORTANT Do Not add any routes below the wildcard route
+homeRouter.get( '/*', ( req, res ) => {
+  res.render( '404', {
+      logged_in: req.session.logged_in,
+      user_name: req.session.user_name
+  } );
+} );
 
 module.exports = homeRouter;
