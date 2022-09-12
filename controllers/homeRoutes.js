@@ -3,7 +3,7 @@ const { Router } = require('express');
 const sequelize = require('../config/connection');
 const { } = require('../models');
 
-homeRouter.get( '/login', ( req, res ) => {
+homeRouter.get( '/', ( req, res ) => {
 
 // * homepage render
     
@@ -11,7 +11,7 @@ homeRouter.get( '/login', ( req, res ) => {
 
 homeRouter.get( '/login', ( req, res ) => {
 
-    if ( req.session.loggedIn ) {
+    if ( req.session.logged_in ) {
       res.redirect( '/' );
       return;
     }
@@ -21,7 +21,7 @@ homeRouter.get( '/login', ( req, res ) => {
 
 homeRouter.get( '/signup', ( req, res ) => {
 
-  if ( req.session.loggedIn ) {
+  if ( req.session.logged_in ) {
     res.redirect( '/' );
     return;
   }
