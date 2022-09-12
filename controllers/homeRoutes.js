@@ -4,7 +4,7 @@ const { Recipe, Unit, Ingredient, RecipeIngredient } = require('../models');
 homeRouter.get( '/', ( req, res ) => {
 
 // * homepage render
-res.render( 'homepage', {
+res.render( 'homePage', {
   logged_in: req.session.logged_in,
   userName: req.session.userName
 } );
@@ -61,5 +61,12 @@ homeRouter.get( '/recipes/:id', async ( req, res ) => {
   }
 } );
 
+// * IMPORTANT Do Not add any routes below the wildcard route
+homeRouter.get( '/*', ( req, res ) => {
+  res.render( '404', {
+      logged_in: req.session.logged_in,
+      userName: req.session.userName
+  } );
+} );
 
 module.exports = homeRouter;
