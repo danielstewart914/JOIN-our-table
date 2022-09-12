@@ -1,22 +1,24 @@
 <h2>Login</h2>
-<form class="login-form container">
+<form id="login" class="container text-black">
     <div class="row justify-content-center">
         <div class="form-floating m-1 col-sm-8 col-lg-6">
-            <input class="form-control" name="Email:" type="text" id="loginEmail" placeholder="Email:">
+            <input class="form-control" name="Email:" type="text" id="loginEmail" placeholder="Email:" data-bs-trigger="manual" data-bs-placement="left" data-bs-title="Email cannot be blank!">
             <label class="from-label ms-3" for="loginEmail">Email:</label>
         </div>
         <div class="form-floating m-1 col-sm-8 col-lg-6">
-            <input class="form-control" name="Password" type="password" id="loginPassword" placeholder="Password:">
+            <input class="form-control" name="Password" type="password" id="loginPassword" placeholder="Password:" data-bs-trigger="manual" data-bs-placement="left" data-bs-title="Password cannot be blank!">
             <label class="form-label ms-3" for="loginPassword">Password:</label>
         </div>
         <div class="form-floating m-1 col-12 text-center">
-            <button class="btn btn-secondary bg-dark-grey px-5" type="submit">Login</button>
+            <button class="btn btn-custom px-5" type="submit">Login</button>
         </div>
     </div>
 </form>
 <footer>
     Don't have an Account?
-    <a href="/signup">Sign Up Here</a>
+    <a class="text-black"href="/signup">Sign Up Here</a>
 </footer>
+
+{{>failed-modal}}
 
 <script src="/js/login.js"></script>

@@ -4,6 +4,10 @@ const { Recipe, Unit, Ingredient, RecipeIngredient } = require('../models');
 homeRouter.get( '/', ( req, res ) => {
 
 // * homepage render
+res.render( 'homepage', {
+  logged_in: req.session.logged_in,
+  userName: req.session.userName
+} );
     
 } );
 
@@ -45,8 +49,10 @@ homeRouter.get( '/recipes/:id', async ( req, res ) => {
 
   const recipe = recipeData.toJSON();
 
-  res.render( 'recipe', { 
+  res.render( 'recipe', {
+    logged_in: req.session.logged_in,
     user_id: req.session.user_id,
+    userName: req.session.userName,
     recipe
    } );
   

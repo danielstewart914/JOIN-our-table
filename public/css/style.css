@@ -1,43 +1,40 @@
-
+:root {
+    --phthalo-green: #132a13ff;
+    --hunter-green: #31572cff;
+    --sap-green: #4f772dff;
+    --asparagus: #90a955ff;
+    --key-lime: #ecf39eff;
+}
 body {
-    background-color: #31572cff;
-}
-
-.mainBanner {
-    background-color: #132a13ff;
-    color: white; 
-}
-
-.navBar {
-    background-color: #90a955ff;
-}
-
-.nav-link {
-    color: white;
+    background-color: var(--sap-green);
 }
 
 .bg-asparagus {
-    background-color: #90a955ff;
+    background-color: var(--asparagus);
 }
 
 .bg-phthalo-green {
-    background-color: #132a13ff;
+    background-color: var(--phthalo-green);
 }
 
 .bg-key-lime {
-    background-color: #ecf39eff;
-}
-
-.border-asparagus {
-    border-color: #90a955ff !important;
+    background-color: var(--key-lime);
 }
 
 .pre-line {
     white-space: pre-line;
 }
 
-/* --phthalo-green: #132a13ff;
---hunter-green: #31572cff;
---sap-green: #4f772dff;
---asparagus: #90a955ff;
---key-lime: #ecf39eff; */
+.brand {
+    font-size: 1em;
+}
+
+.btn-custom {
+    background-color: var(--phthalo-green);
+    color: #fff;
+}
+
+.btn-custom:hover, .btn-nav:focus {
+    background-color: var(--sap-green);
+    color: #fff; 
+}
