@@ -6,8 +6,8 @@ userRouter.post( '/', async ( req, res ) => {
     try {
         const newUserData = await User.create( req.body );
 
-        req.session.userId = newUserData.id;
-        req.session.userName = newUserData.name;
+        req.session.user_id = newUserData.id;
+        req.session.user_name = newUserData.name;
         req.session.logged_in = true;
         req.session.save( () => res.status(200).json( newUserData ) );
     } catch ( err ) {
@@ -32,8 +32,8 @@ userRouter.post( '/login', async ( req, res ) => {
             return;
         }
 
-        req.session.userId = userData.id;
-        req.session.userName = userData.name;
+        req.session.user_id = userData.id;
+        req.session.user_name = userData.name;
         req.session.logged_in = true;
 
         req.session.save( () => {
