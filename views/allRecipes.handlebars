@@ -1,4 +1,4 @@
-{{#each recipes||recipe}}
+{{#each recipes as |recipe}}
 <div class="card card border border-5 border-light">
 <div class="card-body bg-key-lime" style="width: 18rem;">
   <img src="{{#if recipe.image_path}}{{recipe.image_path}}{{else}}/images/default.svg{{/if}}" class="card-img-top" alt="Image of current recipe">
