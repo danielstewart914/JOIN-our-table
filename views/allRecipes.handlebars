@@ -1,9 +1,11 @@
-<div class="card border border-5 border-light">
-<div class="card-body" style="width: 18rem;">
+{{#each recipes||recipe}}
+<div class="card card border border-5 border-light">
+<div class="card-body bg-key-lime" style="width: 18rem;">
   <img src="{{#if recipe.image_path}}{{recipe.image_path}}{{else}}/images/default.svg{{/if}}" class="card-img-top" alt="Image of current recipe">
   {{#unless recipe.image_path}}<p class="fs-1 fw-semibold position-absolute text-black py-2 px-4 bg-white rounded-2 bg-opacity-50">No Image</p>{{/unless}}
   </div>
-  <div class="card-body">
+  <div class="card-header bg-phthalo-green text-white text-center">
     <h5 class="card-title">{{recipe.recipe_title}}</h5>
   </div>
 </div>
+{{/each}}
