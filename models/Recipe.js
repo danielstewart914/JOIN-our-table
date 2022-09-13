@@ -13,9 +13,9 @@ Recipe.init({
   image_path: {
     type: DataTypes.STRING,
     allowNull: false,
-    validate: {
-      isUrl: true,
-    },
+    // validate: {
+    //   isUrl: true,
+    // },
   },
   recipe_title: {
     type: DataTypes.STRING(50),
