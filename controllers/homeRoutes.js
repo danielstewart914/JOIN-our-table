@@ -1,5 +1,6 @@
 const homeRouter = require('express').Router();
 const { Recipe, Unit, Ingredient, RecipeIngredient } = require('../models');
+const { Op } = require("sequelize");
 
 homeRouter.get( '/', ( req, res ) => {
 
@@ -126,6 +127,41 @@ homeRouter.get( '/recipes/:id', async ( req, res ) => {
     res.status(400).json( err );
   }
 } );
+
+homeRouter.get('/recipes/ingredient/:id', async (req, res) => {
+  try {
+    const recipeData = await Recipe.findAll({
+      where: { 
+        [Op.and]: [
+          { '$ingredients.id$': req.params.id },
+          { public: true }
+        ]
+        },
+      include: {
+        model: Ingredient,
+        through: RecipeIngredient,
+        as: 'ingredients',
+      }
+    })
+    if ( !recipeData ) {
+      res.render( '404', {
+        logged_in: req.session.logged_in,
+        user_name: req.session.user_name
+    } );
+    return;
+    }
+    
+    const recipes = recipeData.map( recipe => recipe.toJSON() );
+    res.render( 'recipeResults', {
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
+      user_name: req.session.user_name,
+      recipes
+     });
+  } catch ( err ) {
+    res.status(400).json( err )
+  }
+});
 
 // * IMPORTANT Do Not add any routes below the wildcard route
 homeRouter.get( '/*', ( req, res ) => {
