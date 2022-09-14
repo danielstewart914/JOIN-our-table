@@ -34,6 +34,15 @@ homeRouter.get( '/signup', ( req, res ) => {
   res.render( 'signup' );
 } );
 
+homeRouter.get( '/recipes/new', isAuthorized, async ( req, res ) => {
+
+  res.render( 'newRecipe', {
+    logged_in: req.session.logged_in,
+    user_id: req.session.user_id,
+    user_name: req.session.user_name,
+  } );
+} );
+
 homeRouter.get( '/recipes', async ( req, res ) => {
   try { 
     const recipeData = await Recipe.findAll({

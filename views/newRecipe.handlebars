@@ -1,0 +1,109 @@
+<div class="card m-1 border border-light border-5">
+    <h2 class="card-header display-4 text-center bg-phthalo-green text-light">New Recipe</h2>
+    <div class="card-body bg-asparagus">
+        <form id="new-post" class="container row p-2">
+            <div class="form-floating m-3">
+                <input type="text" name="Post Title" id="title" class="form-control bg-key-lime" placeholder="Title" data-bs-trigger="manual" data-bs-placement="bottom" data-bs-title="Title cannot be blank!">
+                <label class="form-label ms-3 text-black" for="title">Title</label>
+            </div>
+            <div class="form-floating m-3">
+                <textarea class="col-12 form-control bg-key-lime" name="Description" id="description" cols="200" rows="50" style="height: 5em;" placeholder="Description" data-bs-trigger="manual" data-bs-placement="bottom" data-bs-title="Description cannot be blank!"></textarea>
+                <label class="form-label ms-3 text-black" for="description">Description</label>
+            </div>
+            <div class="form-floating m-3">
+                <textarea class="col-12 form-control bg-key-lime" name="Directions" id="directions" cols="200" rows="15" style="height: 15em;" placeholder="Directions" data-bs-trigger="manual" data-bs-placement="bottom" data-bs-title="Directions cannot be blank!"></textarea>
+                <label class="form-label ms-3 text-black" for="directions">Directions</label>
+            </div>
+            <div class="input-group m-3">
+              <label for="recipe-image" class="input-group-btn btn btn-custom">Recipe Image</label>
+              <input class="form-control bg-key-lime border-dark" type="file" id="recipe-image" accept="image/*">
+            </div>
+            <div class="col-12">
+              <h3>Ingredients:</h3>
+              <ul id="recipe-ingredients-list" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 fs-5"></ul>
+              <span id="modal-trigger" class="text-white text-decoration-none pointer mt-3 fs-5">
+                Add Ingredient&nbsp;
+                <button type="button" class="btn btn-custom rounded-circle">&plus;</button>
+              </span>
+            </div>
+            <div class="text-start mt-4 mb-2">
+              <div class="d-flex align-items-center">
+                <span class="fw-bold me-3">Private</span>
+                  <label class="switch" for="is-public">
+                      <input type="checkbox" checked="checked" aria-role="switch" id="is-public">
+                      <span class="slider bg-phthalo-green"></span>
+                  </label>
+                <span class="fw-bold ms-3">Public</span>
+              </div>
+            </div>
+            <footer class="text-end">
+                <button id="submit-recipe" class="btn btn-custom text-light px-4">Submit</button>
+            </footer>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="ingredient-modal" tabindex="-1" role="dialog" aria-labelledby="ingredient-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content border border-light border-5">
+      <div class="modal-header bg-phthalo-green">
+        <h5 class="modal-title display-5" id="ingredient-modal-label">Add Ingredient</h5>
+        <button id="dismiss-ingredient-modal" type="button" class="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bg-sap-green">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="row my-2">
+                    <div class="form-floating col-6 col-sm-3 text-black my-2">
+                        <input class="form-control" name="amount" type="search" id="amount-input" placeholder="Enter Amount" data-bs-trigger="manual" data-bs-placement="bottom" data-bs-title="Must be Integer, Fraction, Both, or Decimal!">
+                        <label class="from-label ms-2" for="amount">Enter Amount</label>
+                    </div>
+                    <div class="form-floating col-9 col-sm-7 text-black my-2">
+                        <input class="form-control" name="unit_search" type="search" id="unit-search" placeholder="Search for Measurement">
+                        <label class="from-label ms-3" for="unit-search">Search for Measurement</label>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center p-0 my-2">
+                        <button id="create-unit" class="btn btn-custom disabled">Create</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="row my-2">
+                    <div class="form-floating col-9 col-sm-10 text-black my-2">
+                        <input class="form-control" name="ingredient_search" type="search" id="ingredient-search" placeholder="Search for Ingredient">
+                        <label class="from-label ms-3" for="ingredient-search">Search for Ingredient</label>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center p-0">
+                        <button id="create-ingredient" class="btn btn-custom disabled">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div id="message" class="fw-semibold text-center"></div>
+          <div class="col-lg-2">
+            <div class="fw-semibold text-center">Amount:</div>
+            <div id="amount-display" class="border border-2 rounded amount my-2 p-1 text-center fs-5 bg-phthalo-green text-white border-light flex-grow-1 flex-shrink-0 d-none"></div>
+          </div>
+          <div class="col-lg-5">
+            <div class="fw-semibold text-center">Measurement:</div>
+            <ul id="unit-list" class="list-group"></ul>
+          </div>
+          <div class="col-lg-5">
+            <div class="fw-semibold text-center">Ingredient:</div>
+            <ul id="ingredient-list" class="list-group"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer bg-asparagus">
+        <button id="add-to-recipe" type="button" class="btn btn-custom disabled">Add Ingredient to Recipe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="/js/addIngredient.js"></script>
+<script src="/js/addRecipe.js"></script>

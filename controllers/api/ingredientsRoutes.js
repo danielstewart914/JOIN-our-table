@@ -1,15 +1,39 @@
 const ingredientsRouter = require('express').Router();
+const { Op } = require( 'sequelize' );
 const { Ingredient } = require('../../models')
 
 // GET all ingredients
 ingredientsRouter.get('/', async (req, res) => {
-    try {
-      const ingredientsData = await Ingredient.findAll();
+  try {
+
+    if ( !req.query.search ) {
+      const ingredientsData = await Ingredient.findAll( {
+        order: [
+          [ 'ingredient_name', 'ASC' ]
+        ]
+      } );
       res.status(200).json(ingredientsData);
-    } catch (err) {
-      res.status(500).json(err);
+      return;
     }
-  });
+
+    const { search } = req.query;
+
+    const ingredientsData = await Ingredient.findAll( {
+      where: {
+        ingredient_name: {
+          [Op.substring]: search
+        }
+      },
+      order: [
+        [ 'ingredient_name', 'ASC' ]
+      ]
+    } );
+  
+    res.status(200).json(ingredientsData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 //Get ingredients by ID:

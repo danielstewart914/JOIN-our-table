@@ -1,18 +1,42 @@
 const unitRouter = require('express').Router();
+const { Op } = require( 'sequelize' );
 const { Unit } = require('../../models');
 
 // GET all units
-unitRouter.get('/units', async (req, res) => {
+unitRouter.get('/', async (req, res) => {
     try {
-        const unitData = await Unit.findAll();
-        res.status(200).json(unitData);
+        if ( !req.query.search ) {
+            const unitData = await Unit.findAll( {
+                order: [
+                    [ 'unit_name', 'ASC' ]
+                  ]
+            } );
+            res.status(200).json(unitData);
+            return;
+        }
+        const { search } = req.query;
+
+        console.log( search )
+
+        const unitsData = await Unit.findAll( {
+        where: {
+            unit_name: {
+            [Op.substring]: search
+            }
+        },
+        order: [
+            [ 'unit_name', 'ASC' ]
+        ]
+        } );
+        res.status(200).json( unitsData );
     } catch (err) {
         res.status(500).json(err);
+        
     }
 });
 
 // GET one unit by id
-unitRouter.get('/units/:id', async (req, res) => {
+unitRouter.get('/:id', async (req, res) => {
     try {
         const unitData = await Unit.findByPk(req.params.id);
         if (!unitData) {
@@ -26,7 +50,7 @@ unitRouter.get('/units/:id', async (req, res) => {
 });
 
 // POST new unit
-unitRouter.post('/units', async (req, res) => {
+unitRouter.post('/', async (req, res) => {
     try {
         const unitData = await Unit.create(req.body);
         res.status(200).json(unitData);
@@ -36,7 +60,7 @@ unitRouter.post('/units', async (req, res) => {
 });
 
 // PUT update unit
-unitRouter.put('/units/:id', async (req, res) => {
+unitRouter.put('/:id', async (req, res) => {
     try {
         const unitData = await Unit.update(req.body, {
             where: {
@@ -50,7 +74,7 @@ unitRouter.put('/units/:id', async (req, res) => {
 });
 
 // DELETE unit
-unitRouter.delete('/units/:id', async (req, res) => {
+unitRouter.delete('/:id', async (req, res) => {
     try {
         const unitData = await Unit.destroy({
             where: {
