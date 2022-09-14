@@ -51,7 +51,13 @@
     </nav>
     <div class="d-flex flex-column p-4 align-items-center text-white">
         {{#if logged_in}}
-        <div class="align-self-end text-white mb-4">Logged In as:<br>{{user_name}}</div> 
+        <div class=" w-100 d-flex justify-content-between">
+            <a href="/recipes/new" class="text-white text-decoration-none pointer mt-3 fs-5">
+            Add Recipe&nbsp;
+            <button type="button" class="btn btn-custom rounded-circle">&plus;</button>
+        </a>
+        <div class="text-white mb-4">Logged In as:<br>{{user_name}}</div> 
+        </div>
         {{/if}} 
         {{{body}}}
     </div>

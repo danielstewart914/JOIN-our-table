@@ -1,6 +1,6 @@
 let showingToolTip = false;
 
-const showToolTip = ( toolTip ) => {
+const showToolTip = ( toolTip, timer = 1500 ) => {
     // if not showing tooltip
     if ( !showingToolTip ) {
         toolTip.show();
@@ -9,7 +9,7 @@ const showToolTip = ( toolTip ) => {
         setTimeout( () => {
             toolTip.hide();
             showingToolTip = false;
-        }, 1500 );
+        }, timer );
     }
 }
 
