@@ -57,6 +57,10 @@ body {
     cursor: pointer;
 }
 
+.square {
+    aspect-ratio: 1/1;
+}
+
 /* slider switch */
 
 .switch {
