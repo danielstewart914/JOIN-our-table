@@ -1,7 +1,6 @@
 {{#each recipes as |recipe|}}
 <div class="p-3">
-    <a href="/recipes/{{recipe.id}}" class="text-decoration-none">
-    <button class="pointer">
+    <a href="/recipes/{{recipe.id}}" class="text-decoration-none pointer">
         <div class="card card border border-5 border-light col bg-key-lime p-0">
             <div class="card-body p-0">
                 <div class="d-flex align-items-center justify-content-center position-relative">
@@ -14,6 +13,5 @@
             </div>
         </div>
         </a>
-    </button> 
 </div>
   {{/each}}
