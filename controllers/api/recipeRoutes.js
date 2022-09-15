@@ -98,7 +98,7 @@ recipeRouter.post( '/image', uploadImage.single( 'recipe_image' ), async ( req, 
 
         const uploadedImage = await s3.upload( {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
-            Key: req.file.originalname,
+            Key: Date.now() + req.file.originalname,
             Body: imageBlob,
           } ).promise();
 
