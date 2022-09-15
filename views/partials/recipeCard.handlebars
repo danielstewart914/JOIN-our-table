@@ -3,7 +3,7 @@
     <a href="/recipes/{{recipe.id}}" class="text-decoration-none pointer">
         <div class="card card border border-5 border-light col bg-key-lime p-0">
             <div class="card-body p-0">
-                <div class="d-flex align-items-center justify-content-center position-relative">
+                <div class="d-flex align-items-center justify-content-center position-relative square">
                 <img src="{{#if recipe.image_path}}{{recipe.image_path}}{{else}}/recipe-images/default.svg{{/if}}" class="w-100" alt="Image of current recipe">
                 {{#unless recipe.image_path}}<p class="fs-1 fw-semibold position-absolute text-black py-2 px-4 bg-white rounded-2 bg-opacity-50">No Image</p>{{/unless}}
                 </div>
