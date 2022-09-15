@@ -21,7 +21,7 @@
             <div class="col-12">
               <h3>Ingredients:</h3>
               <ul id="recipe-ingredients-list" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 fs-5"></ul>
-              <span id="modal-trigger" class="text-white text-decoration-none pointer mt-3 fs-5">
+              <span id="modal-trigger" class="text-white text-decoration-none pointer mt-3 fs-5" data-bs-trigger="manual" data-bs-placement="left" data-bs-title="You must add at least 1 Ingredient!">
                 Add Ingredient&nbsp;
                 <button type="button" class="btn btn-custom rounded-circle">&plus;</button>
               </span>
@@ -57,11 +57,11 @@
             <div class="col-xl-6">
                 <div class="row my-2">
                     <div class="form-floating col-6 col-sm-3 text-black my-2">
-                        <input class="form-control" name="amount" type="search" id="amount-input" placeholder="Enter Amount" data-bs-trigger="manual" data-bs-placement="bottom" data-bs-title="Must be Integer, Fraction, Both, or Decimal!">
+                        <input class="form-control" name="amount" type="search" id="amount-input" placeholder="Enter Amount" data-bs-trigger="manual" data-bs-placement="bottom" data-bs-title="Must be Integer, Fraction, Both, or Decimal!" maxlength="10">
                         <label class="from-label ms-2" for="amount">Enter Amount</label>
                     </div>
                     <div class="form-floating col-9 col-sm-7 text-black my-2">
-                        <input class="form-control" name="unit_search" type="search" id="unit-search" placeholder="Search for Measurement">
+                        <input class="form-control" name="unit_search" type="search" id="unit-search" placeholder="Search for Measurement"  maxlength="30">
                         <label class="from-label ms-3" for="unit-search">Search for Measurement</label>
                     </div>
                     <div class="col-2 d-flex align-items-center justify-content-center p-0 my-2">
@@ -72,7 +72,7 @@
             <div class="col-xl-6">
                 <div class="row my-2">
                     <div class="form-floating col-9 col-sm-10 text-black my-2">
-                        <input class="form-control" name="ingredient_search" type="search" id="ingredient-search" placeholder="Search for Ingredient">
+                        <input class="form-control" name="ingredient_search" type="search" id="ingredient-search" placeholder="Search for Ingredient" maxlength="30">
                         <label class="from-label ms-3" for="ingredient-search">Search for Ingredient</label>
                     </div>
                     <div class="col-2 d-flex align-items-center justify-content-center p-0">
