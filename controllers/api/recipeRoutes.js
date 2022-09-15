@@ -2,7 +2,13 @@ const recipeRouter = require( 'express' ).Router();
 const uploadImage = require( '../../utils/uploadImage' );
 const { Recipe, RecipeIngredient, Unit, Ingredient } = require( '../../models' );
 const fs = require( 'fs' );
-const { json } = require('express');
+const AWS = require( 'aws-sdk' );
+const path = require( 'path' );
+
+const s3 = new AWS.S3( {
+    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
+} );
 
 recipeRouter.post( '/', async ( req, res ) => {
     try {
@@ -36,8 +42,6 @@ recipeRouter.post( '/', async ( req, res ) => {
         }
     } );
 
-    console.log( recipeIngredientInfo )
-
     // create RecipeIngredients
     await RecipeIngredient.bulkCreate( recipeIngredientInfo );
 
@@ -69,14 +73,19 @@ recipeRouter.post( '/image', uploadImage.single( 'recipe_image' ), async ( req, 
 
     try {
         // if file is an image
-        if ( req.validFile ) image_path =  '/' + req.file.path.replace( '\\', '/' );
-        else {
-            image_path = '';
-        }
+        if ( !req.validFile ) image_path = '';
+
+        const imageBlob = fs.readFileSync( req.file.path );
+
+        const uploadedImage = await s3.upload( {
+            Bucket: process.env.AWS_S3_BUCKET_NAME,
+            Key: req.file.originalname,
+            Body: imageBlob,
+          } ).promise();
 
         const updated = await Recipe.update( 
             { 
-                image_path: image_path 
+                image_path: uploadedImage.Location 
             }, 
             {
                 where: { id: req.body.recipe_id }
@@ -87,12 +96,6 @@ recipeRouter.post( '/image', uploadImage.single( 'recipe_image' ), async ( req, 
         else res.status(200).json( { message: 'Nothing happened!' } );
 
     } catch ( err ) {
-        fs.unlink( '.' + image_path, ( err ) => {
-            if ( err ) {
-              console.error( err )
-              return;
-            }
-        } );
         res.status(400).json( err );
     }
 } );
