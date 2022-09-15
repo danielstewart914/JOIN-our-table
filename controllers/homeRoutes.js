@@ -4,15 +4,28 @@ const isAuthorized = require('../utils/auth');
 const { Op } = require("sequelize");
 
 
-homeRouter.get( '/', ( req, res ) => {
-
+homeRouter.get( '/', async ( req, res ) => {
 // * homepage render
-res.render( 'homePage', {
-  logged_in: req.session.logged_in,
-  user_name: req.session.user_name
-} );
-    
-} );
+  try {
+    const recipesData = await Recipe.findAll({
+      where: {
+        public: true
+      },
+      order: [
+        ['createdAt', 'ASC']
+      ],
+      limit: 8
+    });
+    const recipes = recipesData.map( recipe => recipe.toJSON() );
+      res.render( 'homePage', {
+        logged_in: req.session.logged_in,
+        user_name: req.session.user_name,
+        recipes
+      });
+    } catch ( err ) {
+      res.status(400).json( err );
+    }   
+});
 
 homeRouter.get( '/login', ( req, res ) => {
 
