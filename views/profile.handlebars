@@ -1,21 +1,20 @@
 <h2>Your Recipes</h2>
 {{#if recipes}}
 {{#each recipes as |recipe|}}
-
-
-<div class="card m-2 text-black bg-key-lime" style="width: 18rem;">
-    
-                    <img src="{{#if recipe.image_path}}{{recipe.image_path}}{{else}}/recipe-images/default.svg{{/if}}" alt="Recipe Image" class="w-100">
-                    {{#unless recipe.image_path}}<p class="fs-1 fw-semibold position-absolute text-black py-2 px-4 bg-white rounded-2 bg-opacity-50">No Image</p>{{/unless}}
-                
-    <div class="card-body">
-        <h5 class="card-title">{{recipe.recipe_title}}</h5>
-        {{!-- <p class="card-text">{{recipe.description}}</p> --}}
-        <a href="/recipes/{{recipe.id}}" class="btn btn-custom">View Recipe</a>
+<div class="p-3">
+<div class="card card border border-5 border-light col bg-key-lime p-0">
+  <div class="card-body p-0">
+    <div class="d-flex align-items-center justify-content-center position-relative">
+    <img src="{{#if recipe.image_path}}{{recipe.image_path}}{{else}}/recipe-images/default.svg{{/if}}" class="w-100" alt="Image of current recipe">
+    {{#unless recipe.image_path}}<p class="fs-1 fw-semibold position-absolute text-black py-2 px-4 bg-white rounded-2 bg-opacity-50">No Image</p>{{/unless}}
     </div>
+   </div>
+   <div class="card-header bg-phthalo-green text-white text-center">
+      <h5 class="card-title">{{recipe.recipe_title}}</h5>
+   </div>
+  </div>
 </div>
-
-{{/each}}
+  {{/each}}
 {{else}}
 <h2>You have no recipes!</h2>
 {{/if}}
