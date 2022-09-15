@@ -45,51 +45,25 @@ homeRouter.get( '/recipes/new', isAuthorized, async ( req, res ) => {
 
 homeRouter.get( '/recipes', async ( req, res ) => {
   try { 
-    const recipeData = await Recipe.findAll({
-      include: {
-        model: Ingredient,
-        through: RecipeIngredient,
-        as: 'ingredients',
-        attributes: [ 'ingredient_name' ],
-        include: {
-          model: Unit,
-          through: RecipeIngredient,
-          as: 'unit'
+    const recipesData = await Recipe.findAll({
+        where: {
+          public: true
         }
-      } 
   } );
 
-  if ( !recipeData ) {
-    res.render( '404', {
-      logged_in: req.session.logged_in,
-      user_name: req.session.user_name
-  } );
-  return;
+  const recipes = recipesData.map( recipe => recipe.toJSON() );
 
-  }
-
-  const recipe = recipeData.toJSON();
-
-  if ( !recipe.public && recipe.user_id !== req.session.user_id ) {
-    res.render( '401', {
-      logged_in: req.session.logged_in,
-      user_name: req.session.user_name
-  } );
-  return;
-
-  }
-
-  res.render( 'recipe', {
+  res.render( 'allRecipes', {
     logged_in: req.session.logged_in,
     user_id: req.session.user_id,
     user_name: req.session.user_name,
-    recipe
-   } );
+    recipes
+   });
   
   } catch ( err ) {
     res.status(400).json( err );
   }
-} );
+});
 
 homeRouter.get( '/recipes/:id', async ( req, res ) => {
   try { 
