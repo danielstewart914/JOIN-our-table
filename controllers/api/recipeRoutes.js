@@ -76,6 +76,24 @@ recipeRouter.post( '/image', uploadImage.single( 'recipe_image' ), async ( req, 
             return;
         }
 
+        // for local testing
+        if ( !process.env.AWS_S3_BUCKET_NAME ) {
+            let image_path;
+            if ( req.validFile ) image_path =  '/' + req.file.path.replace( '\\', '/' );
+            else {
+                image_path = '';
+            }
+
+            const updated = await Recipe.update( 
+                { 
+                    image_path: image_path 
+                }, 
+                {
+                    where: { id: req.body.recipe_id }
+                },
+            );
+        }
+
         const imageBlob = fs.readFileSync( req.file.path );
 
         const uploadedImage = await s3.upload( {
