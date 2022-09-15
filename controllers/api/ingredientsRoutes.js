@@ -1,6 +1,7 @@
 const ingredientsRouter = require('express').Router();
 const { Op } = require( 'sequelize' );
-const { Ingredient } = require('../../models')
+const { Ingredient } = require('../../models');
+const betterNames = require( '../../utils/betterNames' );
 
 // GET all ingredients
 ingredientsRouter.get('/', async (req, res) => {
@@ -53,7 +54,7 @@ ingredientsRouter.get('/:id', async (req, res) => {
   });
  
   // POST a new ingredient 
- ingredientsRouter.post('/', async (req, res) => {
+ ingredientsRouter.post('/', betterNames, async (req, res) => {
     try {
         const ingredientsData = await Ingredient.create(req.body);
         res.status(200).json(ingredientsData);

@@ -1,6 +1,7 @@
 const unitRouter = require('express').Router();
 const { Op } = require( 'sequelize' );
 const { Unit } = require('../../models');
+const betterNames = require('../../utils/betterNames');
 
 // GET all units
 unitRouter.get('/', async (req, res) => {
@@ -50,7 +51,7 @@ unitRouter.get('/:id', async (req, res) => {
 });
 
 // POST new unit
-unitRouter.post('/', async (req, res) => {
+unitRouter.post('/', betterNames, async (req, res) => {
     try {
         const unitData = await Unit.create(req.body);
         res.status(200).json(unitData);
@@ -60,7 +61,7 @@ unitRouter.post('/', async (req, res) => {
 });
 
 // PUT update unit
-unitRouter.put('/:id', async (req, res) => {
+unitRouter.put('/:id', betterNames, async (req, res) => {
     try {
         const unitData = await Unit.update(req.body, {
             where: {
