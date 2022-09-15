@@ -5,16 +5,28 @@ const imageInputEl = document.querySelector( '#recipe-image' );
 const isPublicEl = document.querySelector( '#is-public' );
 const submitRecipeButton = document.querySelector( '#submit-recipe' );
 
-const postRecipe = async ()  => {
+const emptyTitleToolTip = new bootstrap.Tooltip( titleInputEl );
+const emptyDescriptionToolTip = new bootstrap.Tooltip( descriptionInputEl );
+const emptyDirectionsToolTip = new bootstrap.Tooltip( directionsInputEl );
+const noIngredientToolTip = new bootstrap.Tooltip( addIngredientModal );
 
-    // * Add checks here
+const postRecipe = async ()  => {
 
     const recipe_title = titleInputEl.value.trim();
     const description = descriptionInputEl.value.trim();
     const directions = directionsInputEl.value.trim();
     const imageFile = imageInputEl.files[0];
 
+    if ( isBlank( recipe_title, emptyTitleToolTip ) ) return;
+    if ( isBlank( description, emptyDescriptionToolTip ) ) return;
+    if ( isBlank( directions, emptyDirectionsToolTip ) ) return;
+
     const ingredientsElements = document.querySelectorAll( '.recipe-ingredient' );
+
+    if ( !ingredientsElements.length ) {
+        showToolTip( noIngredientToolTip );
+        return;
+    } 
 
     const ingredients = [];
     ingredientsElements.forEach( ingredientEl => {
