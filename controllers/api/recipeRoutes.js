@@ -69,11 +69,12 @@ recipeRouter.post( '/', async ( req, res ) => {
 } );
 
 recipeRouter.post( '/image', uploadImage.single( 'recipe_image' ), async ( req, res ) => {
-    let image_path;
-
     try {
         // if file is an image
-        if ( !req.validFile ) image_path = '';
+        if ( !req.validFile ) { 
+            res.status(400);
+            return;
+        }
 
         const imageBlob = fs.readFileSync( req.file.path );
 

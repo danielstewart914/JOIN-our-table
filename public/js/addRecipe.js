@@ -32,23 +32,21 @@ const postRecipe = async ()  => {
         headers: { 'Content-Type': 'application/json' }
     } );
 
-    if ( recipeResponse.ok ) {
+    const newRecipe = await recipeResponse.json();
 
-        const newRecipe = await recipeResponse.json();
+    console.log( recipeResponse.ok );
 
-        const body = new FormData();
+    if ( !imageFile ) window.location.replace( `/recipes/${ newRecipe.id }` );
+    const body = new FormData();
 
-        body.append( 'recipe_image', imageFile );
-        body.append( 'recipe_id', newRecipe.id );
+    body.append( 'recipe_image', imageFile );
+    body.append( 'recipe_id', newRecipe.id );
 
-        const imageResponse = await fetch( '/api/recipes/image', {
-            method: 'POST',
-            body
-        } );
-        if ( imageResponse.ok ) window.location.replace( `/recipes/${ newRecipe.id }` );
-    } else {
-
-    }
+    await fetch( '/api/recipes/image', {
+        method: 'POST',
+        body
+    } );
+    if ( recipeResponse.ok ) window.location.replace( `/recipes/${ newRecipe.id }` );
 
 }
 
