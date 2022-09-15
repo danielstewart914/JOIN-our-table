@@ -89,7 +89,10 @@ homeRouter.get( '/recipes/:id', async ( req, res ) => {
         include: {
           model: Unit,
           through: RecipeIngredient,
-          as: 'unit'
+          as: 'unit',
+          where: {
+            '$ingredients.unit.recipeIngredient.recipe_id$': req.params.id
+          }
         }
       } 
   } );
