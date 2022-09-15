@@ -1,13 +1,3 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-col-xl-4">
-{{#each recipes as |recipe|}}
-<div class="card card border border-5 border-light col">
-<div class="card-body bg-key-lime" style="width: 18rem;">
-  <img src="{{#if recipe.image_path}}{{recipe.image_path}}{{else}}/recipe-images/default.svg{{/if}}" class="card-img-top" alt="Image of current recipe">
-  {{#unless recipe.image_path}}<p class="fs-1 fw-semibold position-absolute text-black py-2 px-4 bg-white rounded-2 bg-opacity-50">No Image</p>{{/unless}}
-  </div>
-  <div class="card-header bg-phthalo-green text-white text-center">
-    <h5 class="card-title">{{recipe.recipe_title}}</h5>
-  </div>
-</div>
-{{/each}}
+{{>recipeCard}}
 </div>
