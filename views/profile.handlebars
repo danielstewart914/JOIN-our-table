@@ -1,6 +1,8 @@
 <h2 class="display-4">Your Recipes</h2>
 {{#if recipes}}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-col-xl-4">
 {{>recipeCard}}
+</div>
 {{else}}
 <h2>You have no recipes!</h2>
 {{/if}}
