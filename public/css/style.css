@@ -13,6 +13,9 @@ body {
     background-image: url('../images/hero.jpg');
 }
 
+.text-asparagus {
+    color: var(--asparagus)
+}
 .text-background {
     background-color: #000000aa;
 }
