@@ -9,6 +9,9 @@ body {
     background-color: var(--sap-green);
 }
 
+.hero {
+    background-image: url('../images/hero.jpg');
+}
 .bg-asparagus {
     background-color: var(--asparagus);
 }
