@@ -9,6 +9,14 @@ body {
     background-color: var(--sap-green);
 }
 
+.hero {
+    background-image: url('../images/hero.jpg');
+}
+
+.text-background {
+    background-color: #000000aa;
+}
+
 .bg-asparagus {
     background-color: var(--asparagus);
 }
