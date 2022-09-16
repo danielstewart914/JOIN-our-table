@@ -12,6 +12,11 @@ body {
 .hero {
     background-image: url('../images/hero.jpg');
 }
+
+.text-background {
+    background-color: #00000088;
+}
+
 .bg-asparagus {
     background-color: var(--asparagus);
 }
