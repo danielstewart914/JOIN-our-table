@@ -11,6 +11,7 @@ body {
 
 .hero {
     background-image: url('../images/hero.jpg');
+    background-position: center;
 }
 
 .text-asparagus {
