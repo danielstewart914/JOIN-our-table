@@ -53,6 +53,12 @@ const checkData = () => {
     if ( selectedAmount && selectedUnit && selectedIngredient ) addToRecipeButton.classList.remove( 'disabled' );
     // else disable add to recipe button
     else addToRecipeButton.classList.add( 'disabled' );
+
+    if ( !ingredientSearchEl.value.trim().length ) createIngredientButton.classList.add( 'disabled' );
+    else createIngredientButton.classList.remove( 'disabled' );
+
+    if ( !unitSearchEl.value.trim().length ) createUnitButton.classList.add( 'disabled' );
+    else createUnitButton.classList.remove( 'disabled' );
 }
 
 // create list item elements for ingredient object
@@ -92,12 +98,8 @@ const loadUnits = async () => {
 
         // if there are no ingredients matching search
         if ( !units.length ) {
-            // reveal create button and update message
-            createUnitButton.classList.remove( 'disabled' );
             messageEl.textContent = 'Cannot find Measurement. Click create to add it to the database.';
         } else {
-            // hide create button and update message
-            createUnitButton.classList.add( 'disabled' );
             messageEl.textContent = 'Click a Measurement and Ingredient below to select them.';
         }
 
@@ -125,12 +127,8 @@ const loadIngredients = async () => {
 
         // if there are no ingredients matching search
         if ( !ingredients.length ) {
-            // reveal create button and update message
-            createIngredientButton.classList.remove( 'disabled' );
             messageEl.textContent = 'Cannot find Ingredient. Click create to add it to the database.';
         } else {
-            // hide create button and update message
-            createIngredientButton.classList.add( 'disabled' );
             messageEl.textContent = 'Click a Measurement and Ingredient below to select them.';
         }
 
@@ -151,6 +149,7 @@ addIngredientModal.addEventListener( 'click', ( ) => {
     messageEl.textContent = '';
     loadUnits();
     loadIngredients();
+    checkData();
     ingredientModal.show();
 } );
 
@@ -227,13 +226,14 @@ unitListEl.addEventListener( 'click', ( event ) => {
     event.target.classList.remove( 'bg-key-lime', 'text-black', 'border-dark' );
     event.target.classList.add( 'bg-phthalo-green', 'text-white', 'border-light' );
 
-    // set search field to value of clicked element
+    // set search field to value of clicked element and disable create button
     unitSearchEl.value = event.target.textContent;
     // reset innerHTML
     unitListEl.innerHTML = '';
     // append clicked element to list contents
     unitListEl.appendChild( event.target );
     checkData();
+    createUnitButton.classList.add( 'disabled' );
 } );
 
 // load ingredients on text input
@@ -267,13 +267,14 @@ ingredientListEl.addEventListener( 'click', ( event ) => {
     event.target.classList.remove( 'bg-key-lime', 'text-black', 'border-dark' );
     event.target.classList.add( 'bg-phthalo-green', 'text-white', 'border-light' );
 
-    // set search field to value of clicked element
+    // set search field to value of clicked element and disable create button
     ingredientSearchEl.value = event.target.textContent;
     // reset innerHTML
     ingredientListEl.innerHTML = '';
     // append clicked element to list contents
     ingredientListEl.appendChild( event.target );
     checkData();
+    createIngredientButton.classList.add( 'disabled' );
 } );
 
 createUnitButton.addEventListener( 'click', async ( event ) => {
@@ -290,10 +291,6 @@ createUnitButton.addEventListener( 'click', async ( event ) => {
         const newUnit = await response.json();
         unitListEl.append( createLi( newUnit, true, 'unit' ) );
         selectedUnit = newUnit.id;
-
-        // hide create button and update message
-        createUnitButton.classList.add( 'disabled' );
-        messageEl.textContent = '';
     } else {
         messageEl.textContent = 'Could not create unit';
     }
@@ -315,10 +312,6 @@ createIngredientButton.addEventListener( 'click', async ( event ) => {
         const newIngredient = await response.json();
         ingredientListEl.append( createLi( newIngredient, true, 'ingredient' ) );
         selectedIngredient = newIngredient.id;
-
-        // hide create button and update message
-        createIngredientButton.classList.add( 'disabled' );
-        messageEl.textContent = '';
     } else {
         messageEl.textContent = 'Could not create ingredient';
     } 
