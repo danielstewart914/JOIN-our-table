@@ -48,16 +48,31 @@ const createRecipeIngredientEl = ( amount, unit_id, ingredient_id, unit_name, in
     return recipeIngredientEl;
 }
 
+// checks if typed in name matches existing one
+const checkName = ( value, selector ) => {
+
+    const nameList = document.querySelectorAll( selector );
+
+    let returnValue = false;
+    nameList.forEach( name => {
+        console.log( value.toLowerCase(), name.textContent.toLowerCase() )
+        if ( name.textContent.toLowerCase() === value.toLowerCase() ) {
+            returnValue = true;
+        }
+    } );
+    return returnValue;
+}
+
 // checks if all data is present and enables add to recipe button
 const checkData = () => {
     if ( selectedAmount && selectedUnit && selectedIngredient ) addToRecipeButton.classList.remove( 'disabled' );
     // else disable add to recipe button
     else addToRecipeButton.classList.add( 'disabled' );
 
-    if ( !ingredientSearchEl.value.trim().length ) createIngredientButton.classList.add( 'disabled' );
+    if ( !ingredientSearchEl.value.trim().length || checkName( ingredientSearchEl.value.trim(), '.ingredient' ) ) createIngredientButton.classList.add( 'disabled' );
     else createIngredientButton.classList.remove( 'disabled' );
 
-    if ( !unitSearchEl.value.trim().length ) createUnitButton.classList.add( 'disabled' );
+    if ( !unitSearchEl.value.trim().length || checkName( unitSearchEl.value.trim(), '.unit' ) ) createUnitButton.classList.add( 'disabled' );
     else createUnitButton.classList.remove( 'disabled' );
 }
 
@@ -233,7 +248,6 @@ unitListEl.addEventListener( 'click', ( event ) => {
     // append clicked element to list contents
     unitListEl.appendChild( event.target );
     checkData();
-    createUnitButton.classList.add( 'disabled' );
 } );
 
 // load ingredients on text input
@@ -274,7 +288,6 @@ ingredientListEl.addEventListener( 'click', ( event ) => {
     // append clicked element to list contents
     ingredientListEl.appendChild( event.target );
     checkData();
-    createIngredientButton.classList.add( 'disabled' );
 } );
 
 createUnitButton.addEventListener( 'click', async ( event ) => {
