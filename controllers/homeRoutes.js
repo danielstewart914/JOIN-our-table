@@ -14,7 +14,7 @@ homeRouter.get( '/', async ( req, res ) => {
       order: [
         ['createdAt', 'ASC']
       ],
-      limit: 8
+      limit: 6
     });
     const recipes = recipesData.map( recipe => recipe.toJSON() );
       res.render( 'homePage', {
