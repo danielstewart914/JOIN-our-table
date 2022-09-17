@@ -12,7 +12,7 @@ homeRouter.get( '/', async ( req, res ) => {
         public: true
       },
       order: [
-        ['createdAt', 'ASC']
+        ['createdAt', 'DESC']
       ],
       limit: 6
     });
@@ -78,7 +78,10 @@ homeRouter.get( '/recipes', async ( req, res ) => {
     const recipesData = await Recipe.findAll({
         where: {
           public: true
-        }
+        },
+        order: [
+          ['createdAt', 'DESC']
+        ]
   } );
 
   const recipes = recipesData.map( recipe => recipe.toJSON() );
