@@ -54,7 +54,24 @@ homeRouter.get( '/recipes/new', isAuthorized, async ( req, res ) => {
     user_id: req.session.user_id,
     user_name: req.session.user_name,
   } );
-} );
+});
+
+homeRouter.get('/recipes/search', async (req, res) => {
+  const ingredientsData = await Ingredient.findAll( {
+    order: [
+      [ 'ingredient_name', 'ASC' ]
+    ]
+  });
+  
+  const ingredients = ingredientsData.map(ingredient => ingredient.toJSON())
+  
+  res.render('search', {
+    logged_in: req.session.logged_in,
+    user_id: req.session.user_id,
+    user_name: req.session.user_name,
+    ingredients
+  })
+})
 
 homeRouter.get( '/recipes', async ( req, res ) => {
   try { 
@@ -178,13 +195,17 @@ homeRouter.get('/recipes/ingredient/:id', async (req, res) => {
     } );
     return;
     }
+    const ingredientData = await Ingredient.findByPk(req.params.id)
+
+    const ingredient = ingredientData.toJSON()
     
     const recipes = recipeData.map( recipe => recipe.toJSON() );
     res.render( 'recipeResults', {
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
       user_name: req.session.user_name,
-      recipes
+      recipes,
+      ingredient_name: ingredient.ingredient_name
      });
   } catch ( err ) {
     res.status(400).json( err )

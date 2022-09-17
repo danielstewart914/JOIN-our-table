@@ -1,0 +1,12 @@
+<h2>Ingredient Search</h2>
+<p>Search for recipes by ingredient</p>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 row-cols-xl-4">
+  {{#each ingredients}}
+    <div class="p-2">
+      <a
+        class="btn btn-custom col w-100"
+        href="/recipes/ingredient/{{id}}"
+      >{{ingredient_name}}</a>
+    </div>
+  {{/each}}
+</div>
