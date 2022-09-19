@@ -78,6 +78,7 @@ body {
     object-fit: cover;
     min-width: 100%;
     min-height: 100%;
+		min-height: -webkit-fill-available;
 }
 
 .card {
