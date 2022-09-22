@@ -26,9 +26,11 @@ const addIngredientModal = document.querySelector( '#modal-trigger' );
 const dismissIngredientModal = document.querySelector( '#dismiss-ingredient-modal' );
 
 // recipeIngredient data
-let selectedIngredient = false;
-let selectedUnit = false;
-let selectedAmount = false;
+let selectedIngredient = null;
+let selectedIngredientName = null;
+let selectedUnit = null;
+let selectedUnitName = null;
+let selectedAmount = null;
 
 const createRecipeIngredientEl = ( amount, unit_id, ingredient_id, unit_name, ingredient_name ) => {
     const recipeIngredientEl = document.createElement( 'li' );
@@ -101,69 +103,94 @@ const createLi = ( listItem, selected, value ) => {
     return listItemEl;
 }
 
-const loadUnits = async () => {
+const load = async ( dataType ) => {
     try {
-        // trim search term and fetch
-        const search = unitSearchEl.value.trim();
-        const response = await fetch( `/api/units?search=${ search }` );
-        const units = await response.json();
+        const response = await fetch( `/api/${ dataType }s` );
+        const data = await response.json();
 
         // create document fragment to store units list
-        const unitFrag = document.createDocumentFragment();
-
-        // if there are no ingredients matching search
-        if ( !units.length ) {
-            messageEl.textContent = 'Cannot find Measurement. Click create to add it to the database.';
-        } else {
-            messageEl.textContent = 'Click a Measurement and Ingredient below to select them.';
-        }
+        const dataFrag = document.createDocumentFragment();
 
         // create list item elements for each unit
-        units.forEach( unit => unitFrag.append( createLi( unit, false, 'unit' ) ) );
-        // reset list HTML
-        unitListEl.innerHTML = '';
-        // append fragment to unit list
-        unitListEl.append( unitFrag );
+        data.forEach( dataElement => dataFrag.append( createLi( dataElement, false, dataType ) ) );
+        
+        if ( dataType === 'unit' ) {
+            // reset list HTML
+            unitListEl.innerHTML = '';
+            // append fragment to unit list
+            unitListEl.append( dataFrag );
+        }
+
+        if ( dataType === 'ingredient' ) {
+            // reset list HTML
+            ingredientListEl.innerHTML = '';
+            // append fragment to unit list
+            ingredientListEl.append( dataFrag );
+        }
 
     } catch ( err ) {
         console.log( err );
     }
 }
 
-const loadIngredients = async () => {
-    try {
-        // trim search term and fetch
-        const search = ingredientSearchEl.value.trim();
-        const response = await fetch( `/api/ingredients?search=${ search }` );
-        const ingredients = await response.json();
+const search = ( term, list ) => {
+    // select all ingredient elements
+    const all = document.querySelectorAll( `.${ list }` );
 
-        // create document fragment to store ingredients
-        const ingredientFrag = document.createDocumentFragment();
+    // reset background and text colors of all ingredients
+    all.forEach( element => {
+        element.classList.remove( 'bg-phthalo-green', 'text-white', 'border-light' );
+        element.classList.add( 'text-black', 'bg-key-lime', 'border-dark' );
 
-        // if there are no ingredients matching search
-        if ( !ingredients.length ) {
-            messageEl.textContent = 'Cannot find Ingredient. Click create to add it to the database.';
-        } else {
-            messageEl.textContent = 'Click a Measurement and Ingredient below to select them.';
-        }
+        if ( element.textContent.toLowerCase().includes( term.toLowerCase() ) ) element.classList.remove( 'd-none' );
+        else element.classList.add( 'd-none' );
+    } );
 
-        // create list item elements for each ingredient
-        ingredients.forEach( ingredient => ingredientFrag.append( createLi( ingredient, false, 'ingredient' ) ) );
-        // reset list HTML
-        ingredientListEl.innerHTML = '';
-        // append fragment to ingredient list
-        ingredientListEl.append( ingredientFrag );
+}
 
-    } catch ( err ) {
-        console.log( err );
+const resetAndHideList = ( list, hide ) => {
+    list.forEach( element => {
+        element.classList.remove( 'bg-phthalo-green', 'text-white', 'border-light' );
+        element.classList.add( 'text-black', 'bg-key-lime', 'border-dark', 'd-none' );
+    } );
+}
+
+const selectListItem = ( event, type ) => {
+    // return out of function if clicked element is not an ingredient
+    if ( ![...event.target.classList ].includes( type ) ) return;
+
+    if ( type === 'unit' ) {
+        // set selected ingredient id to the value stored in ingredient element
+        selectedUnit = parseInt( event.target.dataset.id );
+        selectedUnitName = event.target.textContent;
+        // set search field to value of clicked element and disable create button
+        unitSearchEl.value = event.target.textContent;
     }
+
+    if ( type === 'ingredient' ) {
+        // set selected ingredient id to the value stored in ingredient element
+        selectedIngredient = parseInt( event.target.dataset.id );
+        selectedIngredientName = event.target.textContent;
+        // set search field to value of clicked element and disable create button
+        ingredientSearchEl.value = event.target.textContent;
+    }
+
+    // select all ingredient elements
+    const all = document.querySelectorAll( `.${ type }`);
+
+    resetAndHideList( all );
+
+    // highlight selected ingredient
+    event.target.classList.remove( 'bg-key-lime', 'text-black', 'border-dark', 'd-none' );
+    event.target.classList.add( 'bg-phthalo-green', 'text-white', 'border-light' );
+
+    checkData();
 }
 
 // show ingredient modal
 addIngredientModal.addEventListener( 'click', ( ) => {
-    messageEl.textContent = '';
-    loadUnits();
-    loadIngredients();
+    load( 'unit' );
+    load( 'ingredient' );
     checkData();
     ingredientModal.show();
 } );
@@ -177,9 +204,11 @@ ingredientModalEl.addEventListener( 'hide.bs.modal', () => {
         unitSearchEl.value = '';
         unitListEl.innerHTML = '';
         amountInputEl.value = '';
-        selectedIngredient = false;
-        selectedUnit = false;
-        selectedAmount = false;
+        selectedIngredient = null;
+        selectedIngredientName = null;
+        selectedUnit = null;
+        selectedUnitName = null;
+        selectedAmount = null;
         amountDisplayEl.classList.add( 'd-none' );
         addToRecipeButton.classList.add( 'disabled' );
     }, 100 );
@@ -188,7 +217,7 @@ ingredientModalEl.addEventListener( 'hide.bs.modal', () => {
 amountInputEl.addEventListener( 'keyup', ( event ) => {
     // get value
     const amount = amountInputEl.value.trim();
-    const amountRegEx = /(^\d{1,2}\/\d{1,2}$)|(^\d+\s\d{1,2}\/\d{1,2}$)|(^\d+$)|(^\d+\.(\d{1,2})$)/;
+    const amountRegEx = /(^-$)|(^\d{1,2}\/\d{1,2}$)|(^\d+\s\d{1,2}\/\d{1,2}$)|(^\d+$)|(^\d+\.(\d{1,2})$)/;
     
     amountDisplayEl.classList.remove( 'd-none' );
 
@@ -213,81 +242,31 @@ amountInputEl.addEventListener( 'keyup', ( event ) => {
 // load units on text input
 unitSearchEl.addEventListener( 'input', async ( event ) => {
     event.preventDefault();
-    loadUnits();
-    selectedUnit = false;
+    search( unitSearchEl.value.trim(), 'unit' )
+    selectedUnit = null;
+    selectedUnitName = null;
     messageEl.textContent = 'Click a Measurement and Ingredient below to select them.';
     checkData();
 } );
 
 unitListEl.addEventListener( 'click', ( event ) => {
     event.preventDefault();
-
-    // return out of function if clicked element is not an ingredient
-    if ( ![...event.target.classList ].includes( 'unit' ) ) return;
-
-    // set selected ingredient id to the value stored in ingredient element
-    selectedUnit = parseInt( event.target.dataset.id );
-
-    // select all ingredient elements
-    const allUnits = document.querySelectorAll( '.unit' );
-
-    // reset background and text colors of all ingredients
-    allUnits.forEach( unitEl => {
-        unitEl.classList.remove( 'bg-phthalo-green', 'text-white', 'border-light' );
-        unitEl.classList.add( 'text-black', 'bg-key-lime', 'border-dark' );
-    } );
-
-    // highlight selected ingredient
-    event.target.classList.remove( 'bg-key-lime', 'text-black', 'border-dark' );
-    event.target.classList.add( 'bg-phthalo-green', 'text-white', 'border-light' );
-
-    // set search field to value of clicked element and disable create button
-    unitSearchEl.value = event.target.textContent;
-    // reset innerHTML
-    unitListEl.innerHTML = '';
-    // append clicked element to list contents
-    unitListEl.appendChild( event.target );
-    checkData();
+    selectListItem( event, 'unit' );
 } );
 
 // load ingredients on text input
 ingredientSearchEl.addEventListener( 'input', async ( event ) => {
     event.preventDefault();
-    loadIngredients();
-    selectedIngredient = false;
+    search( ingredientSearchEl.value.trim(), 'ingredient' )
+    selectedIngredient = null;
+    selectedIngredientName = null;
     messageEl.textContent = 'Click a Measurement and Ingredient below to select them.';
     checkData();
 } );
 
 ingredientListEl.addEventListener( 'click', ( event ) => {
     event.preventDefault();
-
-    // return out of function if clicked element is not an ingredient
-    if ( ![...event.target.classList ].includes( 'ingredient' ) ) return;
-
-    // set selected ingredient id to the value stored in ingredient element
-    selectedIngredient = parseInt( event.target.dataset.id );
-
-    // select all ingredient elements
-    const allIngredients = document.querySelectorAll( '.ingredient' );
-
-    // reset background and text colors of all ingredients
-    allIngredients.forEach( ingredientEl => {
-        ingredientEl.classList.remove( 'bg-phthalo-green', 'text-white', 'border-light' );
-        ingredientEl.classList.add( 'text-black', 'bg-key-lime', 'border-dark' );
-    } );
-
-    // highlight selected ingredient
-    event.target.classList.remove( 'bg-key-lime', 'text-black', 'border-dark' );
-    event.target.classList.add( 'bg-phthalo-green', 'text-white', 'border-light' );
-
-    // set search field to value of clicked element and disable create button
-    ingredientSearchEl.value = event.target.textContent;
-    // reset innerHTML
-    ingredientListEl.innerHTML = '';
-    // append clicked element to list contents
-    ingredientListEl.appendChild( event.target );
-    checkData();
+    selectListItem( event, 'ingredient' );
 } );
 
 createUnitButton.addEventListener( 'click', async ( event ) => {
@@ -302,8 +281,11 @@ createUnitButton.addEventListener( 'click', async ( event ) => {
 
     if ( response.ok ) {
         const newUnit = await response.json();
+        const allUnits = document.querySelectorAll( '.unit' );
+        resetAndHideList( allUnits );
         unitListEl.append( createLi( newUnit, true, 'unit' ) );
         selectedUnit = newUnit.id;
+        selectedUnitName = newUnit.unit_name;
     } else {
         messageEl.textContent = 'Could not create unit';
     }
@@ -323,8 +305,12 @@ createIngredientButton.addEventListener( 'click', async ( event ) => {
 
     if ( response.ok ) {
         const newIngredient = await response.json();
+
+        const allIngredients = document.querySelectorAll( '.ingredient' );
+        resetAndHideList( allIngredients );
         ingredientListEl.append( createLi( newIngredient, true, 'ingredient' ) );
         selectedIngredient = newIngredient.id;
+        selectedIngredientName = newIngredient.ingredient_name;
     } else {
         messageEl.textContent = 'Could not create ingredient';
     } 
@@ -337,8 +323,8 @@ addToRecipeButton.addEventListener( 'click', () => {
         selectedAmount,
         selectedUnit,
         selectedIngredient,
-        unitListEl.children[0].textContent,
-        ingredientListEl.children[0].textContent
+        selectedUnitName,
+        selectedIngredientName
      ) );
 
     ingredientModal.hide();
